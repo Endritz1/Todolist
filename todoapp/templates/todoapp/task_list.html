@@ -1,0 +1,54 @@
+{% extends 'todoapp/main.html' %}
+
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h1>Hello {{ request.user tittle</h1>
+        <h3>You have <i> {{ count }} incomplete tasks </i></h3>
+
+
+    </div>
+
+</div>
+{% if request.user.is_authenticated %}
+    <p>{{ request.user }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'login'}">Login</a>
+{% endif %}
+
+
+<p>{{ request.user }}</p>
+<hr>
+
+
+<h1>My Todo List</h1>
+<form action="" method="GET">
+    <input type="text" name="search-area" placeholder="{{ taskt.title}}">
+    <input type="button" value="Search Task">
+
+
+</form>
+
+
+<table>
+    <tr>
+        <th>Items</th>
+    </tr>
+    {% for tasks in task %}
+    <tr>
+
+        <td> {{task.id}} - {{tasks.title}}</td>
+        <td><a href="{% url 'tasks-detail' tasks.id %}">View</a></td>
+        <td><a href="{% url 'task-create' %}">Add</a></td>
+        <td><a href="{% url 'task-update' tasks.id %}">Update</a></td>
+        <td><a href="{% url 'task-delete' tasks.id %}">Delete</a></td>
+
+    </tr>
+    {% empty %}
+    <h3>No items in list</h3>
+    <a href="{% url 'task-create' %}">Add new item</a>
+    {% endfor %}
+</table>
+{% endblock content %}
